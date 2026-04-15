@@ -14,6 +14,7 @@ This is an n8n community node for OpenRouter API integration. It allows you to i
 - Send chat messages to AI models
 - Customize model parameters such as temperature, max tokens, frequency penalty, and presence penalty
 - View truncated model descriptions and pricing information in the model selector
+- Support for custom Base URL — point the node at any OpenAI-compatible proxy or self-hosted endpoint
 - Easy integration with n8n workflows
 
 ## Installation
@@ -95,7 +96,8 @@ To use this node, you need to set up OpenRouter API credentials:
 - **System Prompt**: (Optional) Set the behavior or role of the AI assistant
 - **Message**: The user's input message to the AI
 - **Temperature**: Controls the randomness of the AI's output (0.0 to 1.0)
-- **Additional Fields**: 
+- **Base URL**: (Optional) Override the default API base URL (`https://openrouter.ai/api/v1`). Leave empty to use the default OpenRouter endpoint. Set this to any OpenAI-compatible endpoint — for example, a self-hosted proxy, a corporate gateway, or another provider that follows the OpenAI Chat Completions API format. The model list dropdown will also use this URL when fetching available models.
+- **Additional Fields**:
   - **Frequency Penalty**: Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far.
   - **Max Tokens**: The maximum number of tokens to generate in the chat completion.
   - **Presence Penalty**: Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far.
@@ -152,6 +154,10 @@ n8n is a free and open [fair-code licensed](https://docs.n8n.io/reference/licens
 OpenRouter is a platform that provides a unified API to access various AI models. It allows developers to integrate multiple AI services into their applications without managing separate API integrations for each model provider. OpenRouter supports a wide range of models from different providers, making it easier to experiment with and deploy various AI capabilities in your workflows.
 
 ## Changelog
+
+### 0.3.38
+- Added **Base URL** parameter — override the default `https://openrouter.ai/api/v1` endpoint with any OpenAI-compatible URL (proxies, self-hosted instances, etc.)
+- The model list dropdown now respects the custom Base URL when fetching available models
 
 ### 0.3.36
 - Added truncated model descriptions in the model selector

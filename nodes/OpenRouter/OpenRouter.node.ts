@@ -121,6 +121,15 @@ export class OpenRouter implements INodeType {
 				description: 'What sampling temperature to use',
 			},
 			{
+				displayName: 'Base URL',
+				name: 'baseUrl',
+				type: 'string',
+				default: '',
+				placeholder: 'https://openrouter.ai/api/v1',
+				description:
+					'Override the default API base URL. Leave empty to use the default OpenRouter endpoint (https://openrouter.ai/api/v1). Useful for proxies or OpenAI-compatible endpoints.',
+			},
+			{
 				displayName: 'Additional Fields',
 				name: 'additionalFields',
 				type: 'collection',
@@ -167,8 +176,10 @@ export class OpenRouter implements INodeType {
 		loadOptions: {
 			async getModels(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const credentials = await this.getCredentials('openRouterApi');
+				const rawBaseUrl = (this.getNodeParameter('baseUrl', '') as string).trim();
+				const baseUrl = rawBaseUrl || 'https://openrouter.ai/api/v1';
 				const options: IRequestOptions = {
-					url: 'https://openrouter.ai/api/v1/models',
+					url: `${baseUrl}/models`,
 					headers: {
 						Authorization: `Bearer ${credentials.apiKey}`,
 						'HTTP-Referer': 'https://github.com/MatthewSabia/n8n-nodes-openrouter',
@@ -244,6 +255,8 @@ export class OpenRouter implements INodeType {
 				const systemPrompt = this.getNodeParameter('system_prompt', i, '') as string;
 				const message = this.getNodeParameter('message', i) as string;
 				const temperature = this.getNodeParameter('temperature', i) as number;
+				const rawBaseUrl = (this.getNodeParameter('baseUrl', i, '') as string).trim();
+				const baseUrl = rawBaseUrl || 'https://openrouter.ai/api/v1';
 				const additionalFields = this.getNodeParameter('additionalFields', i) as IDataObject;
 
 				if (operation === 'chat') {
@@ -271,7 +284,7 @@ export class OpenRouter implements INodeType {
 					};
 
 					const options: IRequestOptions = {
-						url: 'https://openrouter.ai/api/v1/chat/completions',
+						url: `${baseUrl}/chat/completions`,
 						headers: {
 							Authorization: `Bearer ${credentials.apiKey}`,
 							'HTTP-Referer': 'https://github.com/MatthewSabia/n8n-nodes-openrouter',

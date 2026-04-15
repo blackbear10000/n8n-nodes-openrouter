@@ -1,5 +1,5 @@
 {
-  "name": "n8n-nodes-openrouter",
+  "name": "n8n-nodes-openrouter-baseurl",
   "version": "0.3.37",
   "description": "n8n node for OpenRouter API integration",
   "keywords": [

@@ -1,4 +1,4 @@
-# n8n-nodes-openrouter
+# n8n-nodes-openrouter-baseurl
 
 This is an n8n community node for OpenRouter API integration. It allows you to interact with various AI models through the OpenRouter platform directly from your n8n workflows.
 
@@ -26,7 +26,7 @@ To install this node as a community node in n8n, follow these steps:
 1. Open your n8n instance
 2. Go to "Settings" > "Community Nodes"
 3. Select "Install"
-4. Enter `n8n-nodes-openrouter` in the "Enter npm package name" field
+4. Enter `n8n-nodes-openrouter-baseurl` in the "Enter npm package name" field
 5. Agree to the risks of using community nodes (if prompted)
 6. Click "Install"
 
@@ -40,7 +40,7 @@ If you prefer manual installation or are using a custom n8n setup:
 2. Navigate to the `nodes` subdirectory
 3. Run the following command:
    ```
-   npm install n8n-nodes-openrouter
+   npm install n8n-nodes-openrouter-baseurl
    ```
 4. Restart your n8n instance
 
